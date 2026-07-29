@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Моя страница</title>
   <style>
-    /* Базовые стили */
     * {
       margin: 0;
       padding: 0;
@@ -22,12 +21,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      overflow-x: hidden;
     }
 
-    body::before {
-      content: '';
+    /* Фоновый слой (работает в Telegram) */
+    .bg-animated {
       position: fixed;
       top: 0;
       left: 0;
@@ -39,32 +36,38 @@
       animation: gradient 8s ease infinite;
       -webkit-animation: gradient 8s ease infinite;
       will-change: background-position;
-  }
+    }
 
     @keyframes gradient {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
-  }  
+    }
+
     @-webkit-keyframes gradient {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
-  }
+    }
+
     @media (prefers-reduced-motion: reduce) { 
-      body::before {       /* ← замени body на body::before */
+      .bg-animated {
         animation: none;
         -webkit-animation: none;
       }
-  }
+    }
 
     .container {
       max-width: 800px;
+      width: 100%;
       margin: 0 auto;
-      background: white;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       padding: 2rem 2.5rem;
       border-radius: 24px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       position: relative;
       z-index: 1;
     }
@@ -83,6 +86,10 @@
       padding-bottom: 1rem;
     }
 
+    .subtitle p {
+      margin-bottom: 0.2rem;
+    }
+
     p {
       margin-bottom: 1rem;
     }
@@ -99,36 +106,34 @@
       text-decoration: underline;
     }
 
-    /* Блок с фото */
     .gallery {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin: 1.5rem 0 2rem;
-  }
-  
-  .gallery img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    background-color: #f1f5f9;
-  }
-  
-  .gallery img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  }
-  
-  @media (max-width: 500px) {
-    .gallery {
-      grid-template-columns: 1fr;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0 2rem;
     }
-  }
 
-    /* Кнопки */
+    .gallery img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      background-color: #f1f5f9;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    @media (max-width: 500px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .buttons {
       display: flex;
       flex-wrap: wrap;
@@ -138,58 +143,58 @@
 
     .btn {
       display: inline-block;
-      background-color: #2563eb;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
       padding: 0.65rem 1.6rem;
       border-radius: 40px;
       font-weight: 500;
       text-decoration: none;
-      transition: background-color 0.2s, transform 0.15s;
-      box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
       border: none;
       cursor: pointer;
+      flex: 1;
+      text-align: center;
     }
 
     .btn:hover {
-      background-color: #1d4ed8;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
       text-decoration: none;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
     }
 
     .btn-outline {
-      background-color: transparent;
-      color: #2563eb;
-      border: 2px solid #2563eb;
+      background: transparent;
+      color: #667eea;
+      border: 2px solid #667eea;
       box-shadow: none;
     }
 
     .btn-outline:hover {
-      background-color: #2563eb;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
     }
 
     .btn-secondary {
-      background-color: #64748b;
-      box-shadow: 0 4px 8px rgba(100, 116, 139, 0.2);
+      background: rgba(100, 116, 139, 0.8);
+      box-shadow: 0 4px 15px rgba(100, 116, 139, 0.2);
     }
 
     .btn-secondary:hover {
-      background-color: #475569;
-      box-shadow: 0 6px 16px rgba(100, 116, 139, 0.3);
+      background: #475569;
+      box-shadow: 0 8px 25px rgba(100, 116, 139, 0.3);
     }
 
     .footer {
       margin-top: 2.5rem;
       padding-top: 1.5rem;
-      border-top: 1px solid #e2e8f0;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
       font-size: 0.9rem;
       color: #64748b;
       text-align: center;
     }
 
-    /* Адаптив */
     @media (max-width: 500px) {
       .container {
         padding: 1.5rem;
@@ -199,26 +204,25 @@
         font-size: 1.7rem;
       }
 
-      .gallery img {
-        max-width: 100%;
-      }
-
       .buttons {
         flex-direction: column;
         align-items: stretch;
       }
 
       .btn {
-        text-align: center;
+        flex: none;
+        width: 100%;
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- ФОНОВЫЙ СЛОЙ (добавлен!) -->
+  <div class="bg-animated"></div>
+
   <div class="container">
 
-    <!-- Заголовок -->
     <h1><strong>🟣 Катя Авдеева, 22 года</strong></h1>
     <div class="subtitle">
       <p>📦 Размер пака — 343 MB</p>
@@ -226,7 +230,6 @@
       <p>🎬 Кол-во видео — 24</p>
     </div>
 
-    <!-- Текст со ссылками -->
     <p>
       Полный интим пак с фото и видео, ссылками на соц.сети, списком друзей, переп#сками и многим другим
       уже залит в ПРИВАТНЫЙ КАНАЛ - <a href="https://t.me/iskusheniyeai_bot" target="_blank">@iskusheniyeai_bot</a>
@@ -236,11 +239,8 @@
       Также доступ можно приобрести, написав администратору - <a href="https://t.me/iskusheniyeee" target="_blank">@iskusheniyeee</a> 
     </p>
 
-    <p>
-      Фото с ней ниже👇
-    </p>
+    <p>Фото с ней ниже👇</p>
 
-    <!-- Фотографии (замени ссылки на свои) -->
     <div class="gallery">
       <img src="images/photo_2026-07-29_07-10-56 (2).jpg" alt="Фото 1">
       <img src="images/photo_2026-07-29_07-10-56.jpg" alt="Фото 2">
@@ -250,13 +250,11 @@
       <img src="images/photo555.jpg" alt="Фото 6">
     </div>
 
-    <!-- Кнопки с ссылками -->
     <div class="buttons">
       <a href="https://t.me/iskusheniyeai_bot" class="btn" target="_blank">Купить</a>
       <a href="https://t.me/iskusheniyeee" class="btn btn-secondary">Написать</a>
     </div>
 
-    <!-- Нижний колонтитул -->
     <div class="footer">
       &copy; 2026 · Сделано с ❤️ для GitHub Pages
     </div>
