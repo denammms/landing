@@ -61,29 +61,32 @@
 
     /* Блок с фото */
     .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin: 1.5rem 0 2rem;
-      justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+  }
+  
+  .gallery img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    background-color: #f1f5f9;
+  }
+  
+  .gallery img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+  
+  @media (max-width: 500px) {
+    .gallery {
+      grid-template-columns: 1fr;
     }
-
-    .gallery img {
-      width: 100%;
-      max-width: 220px;
-      height: auto;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      background-color: #f1f5f9;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.02);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    }
+  }
 
     /* Кнопки */
     .buttons {
@@ -199,6 +202,9 @@
       <img src="images/photo_2026-07-29_07-10-56 (2).jpg" alt="Фото 1">
       <img src="images/photo_2026-07-29_07-10-56.jpg" alt="Фото 2">
       <img src="images/photo_2026-07-29_07-11-09.jpg" alt="Фото 3">
+      <img src="https://picsum.photos/id/55/400/400" alt="Фото 4">
+      <img src="https://picsum.photos/id/64/400/400" alt="Фото 5">
+      <img src="https://picsum.photos/id/80/400/400" alt="Фото 6">
     </div>
 
     <!-- Кнопки с ссылками -->
